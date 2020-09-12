@@ -18,9 +18,6 @@ WORKDIR /workspace
 COPY .devcontainer/environment.yml.temp environment.yml* /workspace/
 RUN if [ -f "environment.yml" ]; then conda env update base -f environment.yml && rm environment.yml*; fi
 
-# Install zipline
-RUN conda install -c Quantopian zipline
-
 # Clean up
 RUN apt-get autoremove -y \
   && apt-get clean -y \
