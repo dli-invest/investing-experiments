@@ -1,24 +1,23 @@
-#-----------------------------------------------------------------------------------------
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License. See LICENSE in the project root for license information.
-#-----------------------------------------------------------------------------------------
+# See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.134.0/containers/python-3/.devcontainer/base.Dockerfile
+ARG VARIANT="3.6"
+FROM mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT}
 
-FROM continuumio/anaconda3
+# [Optional] Allow the vscode user to pip install globally w/o sudo
+ENV PIP_TARGET=/usr/local/pip-global
+ENV PYTHONPATH=${PIP_TARGET}:${PYTHONPATH}
+ENV PATH=${PIP_TARGET}/bin:${PATH}
+RUN mkdir -p ${PIP_TARGET} \
+  && chown vscode:root ${PIP_TARGET} \
+  && echo "if [ \"\$(stat -c '%U' ${PIP_TARGET})\" != \"vscode\" ]; then chown -R vscode:root ${PIP_TARGET}; fi" \
+  | tee -a /root/.bashrc /home/vscode/.bashrc /root/.zshrc >> /home/vscode/.zshrc 
 
-# Copy default endpoint specific user settings overrides into container to specify Python path
-COPY .devcontainer/settings.vscode.json /root/.vscode-remote/data/Machine/settings.json
+RUN apt-get -y install libatlas-base-dev gfortran pkg-config libfreetype6-dev hdf5-tools
+# [Optional] If your pip requirements rarely change, uncomment this section to add them to the image.
+# COPY requirements.txt /tmp/pip-tmp/
+# RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
+#    && rm -rf /tmp/pip-tmp
 
-# Install git, process tools
-RUN apt-get update && apt-get -y install git procps
-
-RUN mkdir /workspace
-WORKDIR /workspace
-
-# Install Python dependencies from requirements.txt if it exists
-COPY .devcontainer/environment.yml.temp environment.yml* /workspace/
-RUN if [ -f "environment.yml" ]; then conda env update base -f environment.yml && rm environment.yml*; fi
-
-# Clean up
-RUN apt-get autoremove -y \
-  && apt-get clean -y \
-  && rm -rf /var/lib/apt/lists/*
+# [Optional] Uncomment this section to install additional OS packages.
+# RUN apt-get update \
+#     && export DEBIAN_FRONTEND=noninteractive \
+#     && apt-get -y install --no-install-recommends <your-package-list-here>

@@ -6,6 +6,8 @@
   "dockerFile": "./Dockerfile",
   "workspaceFolder": "/workspace",
   "extensions": [
-    "ms-python.python"
+    "ms-python.python",
+    "ms-python.pylance",
+    "ms-python.vscode-pylance"
   ]
 }
