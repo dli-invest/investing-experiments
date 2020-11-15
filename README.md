@@ -21,8 +21,8 @@ sudo pip install zipline
 ```
 
 ```
- python /usr/local/bin/python3.6
- ```
+python /usr/local/bin/python3.6
+```
 
  Click Python 3.6.12 as interpreted language
 
@@ -30,4 +30,8 @@ sudo pip install zipline
 Install ipykernel
  ```
  pip install -U ipykernel
+ ```
+
+ ```
+ python3.6 -m pip install -r requirements.txt
  ```
