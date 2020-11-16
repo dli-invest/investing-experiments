@@ -3,9 +3,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import zipline
+from zipline.data.bundles import register
+from zipline.data.bundles.csvdir import csvdir_equities
 from trading_calendars import get_calendar
 from yahoofinancials import YahooFinancials
 import warnings
+import pathlib
 
 plt.style.use('seaborn')
 plt.rcParams['figure.figsize'] = [16, 9]
@@ -31,14 +34,18 @@ def download_csv_data(ticker, start_date, end_date, freq, path):
     # plot the time series
     df.close.plot(title='{} prices --- {}:{}'.format(ticker, start_date, end_date))
 
+
+folder_path = 'data/european/daily'
+pathlib.Path(folder_path).mkdir(parents=True, exist_ok=True)
 download_csv_data(ticker='ABN.AS', 
                   start_date='2017-01-01', 
                   end_date='2017-12-31', 
                   freq='daily', 
-                  path='european/daily/abn.csv')
+                  path='data/european/daily/abn.csv')
 
 download_csv_data(ticker='^AEX', 
                   start_date='2017-01-01', 
                   end_date='2017-12-31', 
                   freq='daily', 
-                  path='european/daily/aex.csv')
+                  path='data/european/daily/aex.csv')
+

@@ -28,10 +28,16 @@ python /usr/local/bin/python3.6
 
 
 Install ipykernel
- ```
- pip install -U ipykernel
- ```
+```
+pip install -U ipykernel
+```
 
- ```
- python3.6 -m pip install -r requirements.txt
- ```
+```
+python3.6 -m pip install -r requirements.txt
+```
+
+To register zipline bundles modify `~/.zipline/extension.py`
+
+```bash
+cat ~/.zipline/extension.py
+```
