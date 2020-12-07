@@ -1,5 +1,6 @@
 name: zipline-env
 channels:
-  - default
+  - zipline
+  - quantopian
 dependencies:
-  - python=3.5
+  - python=3.6
