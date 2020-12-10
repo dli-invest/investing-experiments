@@ -1,1 +1,0 @@
-FROM docker.pkg.github.com/friendlyuser/zipline-docker/zipline_docker:head

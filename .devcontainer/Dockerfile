@@ -1,4 +1,21 @@
-FROM docker.pkg.github.com/friendlyuser/zipline-docker/zipline_docker:head
-# [Optional] Uncomment this section to install additional OS packages.
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends <your-package-list-here>
+FROM mcr.microsoft.com/vscode/devcontainers/anaconda:dev-3
+
+ARG conda_env=algo_trading
+
+RUN conda create -n algo_trading python=3.6.9
+# Activate the environment, and make sure it's activated:
+# Make RUN commands use the new environment:
+SHELL ["conda", "run", "-n", "$conda_env", "/bin/bash", "-c"]
+RUN conda info --envs
+RUN python --version
+# do zipline install manually
+RUN conda install -c conda-forge zipline
+
+# Dont need to copy environment files over
+# COPY environment.yml* .devcontainer/noop.txt /tmp/conda-tmp/
+# RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
+#     && rm -rf /tmp/conda-tmp
+COPY scripts/extension.py  .
+RUN mkdir -p ~/.zipline && cp extension.py ~/.zipline/extension.py
+ENV PATH /opt/conda/envs/$conda_env/bin:$PATH
+ENV CONDA_DEFAULT_ENV $conda_env
