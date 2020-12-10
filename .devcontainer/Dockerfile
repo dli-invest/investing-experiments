@@ -5,7 +5,7 @@ ARG conda_env=algo_trading
 RUN conda create -n algo_trading python=3.6.9
 # Activate the environment, and make sure it's activated:
 # Make RUN commands use the new environment:
-SHELL ["conda", "run", "-n", $conda_env, "/bin/bash", "-c"]
+SHELL ["conda", "run", "-n", "algo_trading", "/bin/bash", "-c"]
 RUN conda info --envs
 RUN python --version
 # do zipline install manually
