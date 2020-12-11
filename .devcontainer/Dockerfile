@@ -12,7 +12,9 @@ RUN conda info --envs
 RUN python --version
 # do zipline install manually
 RUN conda install -n algo_trading -c conda-forge zipline
+# install other packages
 RUN conda install jupyter matplotlib
+RUN conda install pyfolio yahoofinancials requests
 # Dont need to copy environment files over
 # COPY environment.yml* .devcontainer/noop.txt /tmp/conda-tmp/
 # RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
