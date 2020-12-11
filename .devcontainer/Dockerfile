@@ -16,9 +16,6 @@ RUN conda install -n algo_trading -c conda-forge zipline
 RUN conda install jupyter matplotlib
 RUN conda install pyfolio yahoofinancials requests
 # Dont need to copy environment files over
-# COPY environment.yml* .devcontainer/noop.txt /tmp/conda-tmp/
-# RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
-#     && rm -rf /tmp/conda-tmp
 COPY scripts/extension.py  .
 RUN mkdir -p ~/.zipline && cp extension.py ~/.zipline/extension.py
 # ingest does not work in zipline
