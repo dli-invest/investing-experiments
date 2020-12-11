@@ -12,9 +12,12 @@ RUN conda info --envs
 RUN python --version
 # do zipline install manually
 RUN conda install -n algo_trading -c conda-forge zipline
+
 # install other packages
 RUN conda install jupyter matplotlib
-RUN python3.6 -m pip install pyfolio yahoofinancials requests
+RUN python3.6 -m pip install pyfolio requests
+# install yahoofinancials for python3.8
+RUN python3.8 -m pip install yahoofinancials
 # Dont need to copy environment files over
 COPY scripts/extension.py  .
 RUN mkdir -p ~/.zipline && cp extension.py ~/.zipline/extension.py
