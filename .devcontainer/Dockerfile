@@ -19,5 +19,6 @@ RUN conda install jupyter matplotlib
 #     && rm -rf /tmp/conda-tmp
 COPY scripts/extension.py  .
 RUN mkdir -p ~/.zipline && cp extension.py ~/.zipline/extension.py
-RUN zipline ingest -b quantopian-quandl
+# ingest does not work in zipline
+# RUN zipline ingest -b quantopian-quandl
 ENTRYPOINT [ "/bin/bash" ]
