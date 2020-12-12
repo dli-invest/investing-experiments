@@ -13,7 +13,10 @@ RUN python --version
 # do zipline install manually
 RUN conda install -n algo_trading -c conda-forge zipline
 RUN conda install -n algo_trading -c conda-forge pyfolio
+# Theano dependencies
 RUN conda install -n algo_trading mkl-service 
+# g++ and friends
+RUN conda install -c msys2 m2w64-toolchain
 # install other packages
 RUN conda install jupyter matplotlib
 # install yahoofinancials for python3.8
