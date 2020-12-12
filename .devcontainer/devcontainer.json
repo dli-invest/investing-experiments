@@ -2,17 +2,18 @@
 	"name": "Anaconda (Python 3)",
 	"build": { 
 		"context": "..",
-		"dockerfile": "base.Dockerfile",
+		"dockerfile": "Dockerfile",
 		"args": {
 			"INSTALL_NODE": "true",
-			"NODE_VERSION": "lts/*"
+			"NODE_VERSION": "lts/*",
+			"SETUP_ZIPLINE": "true"
 		}
 	},
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
 		"terminal.integrated.shell.linux": "/bin/bash",
-		"python.pythonPath": "/opt/conda/bin/python",
+		"python.pythonPath": "/opt/conda/envs/algo_trading/bin/python",
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
 		"python.formatting.autopep8Path": "/opt/conda/bin/autopep8",
