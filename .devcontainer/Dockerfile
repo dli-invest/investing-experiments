@@ -12,7 +12,7 @@ RUN conda info --envs
 RUN python --version
 # do zipline install manually
 RUN conda install -n algo_trading -c conda-forge zipline
-RUN conda install -c pyfolio
+RUN conda install -n algo_trading -c conda-forge pyfolio
 # install other packages
 RUN conda install jupyter matplotlib
 # install yahoofinancials for python3.8
