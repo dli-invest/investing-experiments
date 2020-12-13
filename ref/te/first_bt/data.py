@@ -32,9 +32,9 @@ def download_csv_data(ticker, start_date, end_date, freq, path):
     # plot the time series
     df.close.plot(title='{} prices --- {}:{}'.format(ticker, start_date, end_date))
 
-workspace = '/root/workspace/zipline-experiments'
+workspace = '/home/vscode/workspace/zipline-experiments'
 folder_path = f'{workspace}/data/tsx/daily'
-pathlib.Path(folder_path).mkdir(parents=True, exist_ok=True)
+# pathlib.Path(folder_path).mkdir(parents=True, exist_ok=True)
 # need to validate start_dates with actual ticker dates
 download_csv_data(ticker='DCM.TO', 
                   start_date='2019-09-01', 
