@@ -1,16 +1,9 @@
-# importing_data
 # Inspired by https://github.com/erykml/medium_articles/blob/master/Quantitative%20Finance/introduction_to_backtesting_eur_stocks.ipynb
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
 from yahoofinancials import YahooFinancials
 import warnings
 import pathlib
-import os
-
-plt.style.use('seaborn')
-plt.rcParams['figure.figsize'] = [16, 9]
-plt.rcParams['figure.dpi'] = 200
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 def download_csv_data(ticker, start_date, end_date, freq, path):
@@ -32,12 +25,20 @@ def download_csv_data(ticker, start_date, end_date, freq, path):
     # plot the time series
     df.close.plot(title='{} prices --- {}:{}'.format(ticker, start_date, end_date))
 
-workspace = '/home/vscode/workspace/zipline-experiments'
-folder_path = f'{workspace}/data/tsx/daily'
-# pathlib.Path(folder_path).mkdir(parents=True, exist_ok=True)
-# need to validate start_dates with actual ticker dates
-download_csv_data(ticker='DCM.TO', 
-                  start_date='2019-09-01', 
-                  end_date='2020-11-29', 
+
+folder_path = 'data/tsx/daily'
+root_path = '/home/vscode/workspace/zipline-experiments'
+data_path = f"{root_path}/{folder_path}"
+pathlib.Path(data_path).mkdir(parents=True, exist_ok=True)
+download_csv_data(ticker='NTAR.CN', 
+                  start_date='2019-05-01', 
+                  end_date='2020-12-10', 
                   freq='daily', 
-                  path=f'{folder_path}/dcm.csv')
+                  path=f'{data_path}/ntar.csv')
+
+download_csv_data(ticker='IDK.CN', 
+                  start_date='2019-05-01', 
+                  end_date='2020-12-10', 
+                  freq='daily', 
+                  path=f'{data_path}/idk.csv')
+
